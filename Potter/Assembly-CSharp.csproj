@@ -67,6 +67,7 @@
      <Compile Include="Assets\OVR\Scripts\OVRPluginEvent.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRTracker.cs" />
      <Compile Include="Assets\OVR\Scripts\OvrCapi.cs" />
+     <Compile Include="Assets\OVR\Scripts\SpellBehavior.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRCrosshair.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRGUI.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRGamepadController.cs" />
