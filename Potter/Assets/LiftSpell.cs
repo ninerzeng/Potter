@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Pose = Thalmic.Myo.Pose;
+using Library;
 
 public class LiftSpell : SpellBehavior {
 
@@ -16,7 +17,6 @@ public class LiftSpell : SpellBehavior {
 	}
 
 	IEnumerator liftEnemies(ThalmicMyo myo) {
-		print ("lifting");
 		Collider[] enemy_colliders = Physics.OverlapSphere(character.transform.position, impactRadius);
 		
 		foreach(Collider col in enemy_colliders) 
@@ -29,13 +29,11 @@ public class LiftSpell : SpellBehavior {
 		
 		while(true)
 		{
-			if(lastPose != myo.pose && myo.pose == Pose.FingersSpread)
+			if(lastPose != myo.pose && myo.pose == Pose.FingersSpread && Accelerometer.forcedGesture(myo.accelerometer))
 				break;
 			yield return null;
 		}
-		
-		print ("done lifting");
-		
+
 		foreach(Collider col in enemy_colliders) 
 		{
 			if (col.gameObject.tag == "Enemy") {

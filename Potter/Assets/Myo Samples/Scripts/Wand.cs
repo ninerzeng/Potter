@@ -5,6 +5,7 @@ using LockingPolicy = Thalmic.Myo.LockingPolicy;
 using Pose = Thalmic.Myo.Pose;
 using UnlockType = Thalmic.Myo.UnlockType;
 using VibrationType = Thalmic.Myo.VibrationType;
+using Library;
 
 // Change the material when certain poses are made with the Myo armband.
 // Vibrate the Myo armband when a fist pose is made.
@@ -21,6 +22,8 @@ public class Wand : MonoBehaviour
     public Material waveInMaterial;
     public Material waveOutMaterial;
     public Material doubleTapMaterial;
+	public Material fistMaterial;
+	public Material fingerSpreadMaterial;
 
     // The pose from the last update. This is used to determine if the pose has changed
     // so that actions are only performed upon making them rather than every frame during
@@ -38,7 +41,7 @@ public class Wand : MonoBehaviour
 	        // Access the ThalmicMyo component attached to the Myo game object.
 	        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
 
-	        // Check if the pose has changed since last update.
+			// Check if the pose has changed since last update.
 	        // The ThalmicMyo component of a Myo game object has a pose property that is set to the
 	        // currently detected pose (e.g. Pose.Fist for the user making a fist). If no pose is currently
 	        // detected, pose will be set to Pose.Rest. If pose detection is unavailable, e.g. because Myo
@@ -48,34 +51,35 @@ public class Wand : MonoBehaviour
 
 	            // Vibrate the Myo armband when a fist is made.
 	            if (thalmicMyo.pose == Pose.Fist) {
+					print ("lift");
 					thalmicMyo.Vibrate (VibrationType.Short);
-					print ("fist");
 					liftSpell.Attack(thalmicMyo);
-					print ("after liftSpell attack");
+					renderer.material = fistMaterial;
 	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
 	            // Change material when wave in, wave out or double tap poses are made.
-	            } else if (thalmicMyo.pose == Pose.WaveIn) {
+				} else if (thalmicMyo.pose == Pose.WaveIn) {
+					print ("shove left");
 					thalmicMyo.Vibrate (VibrationType.Short);
-					print ("wave in");
+
 					shoveLeftSpell.Attack (thalmicMyo);
 	                renderer.material = waveInMaterial;
 
 	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
 	            } else if (thalmicMyo.pose == Pose.WaveOut) {
+					print ("shove right");
 					thalmicMyo.Vibrate (VibrationType.Short);
-					print ("wave out");
 					shoveRightSpell.Attack (thalmicMyo);
 	                renderer.material = waveOutMaterial;
 
 	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
 	            } else if (thalmicMyo.pose == Pose.DoubleTap) {
 					thalmicMyo.Vibrate (VibrationType.Short);
-					print ("double tap");
 	                renderer.material = doubleTapMaterial;
 	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
-				} else if (thalmicMyo.pose == Pose.FingersSpread) {
+				} else if (thalmicMyo.pose == Pose.FingersSpread && !Accelerometer.forcedGesture(thalmicMyo.accelerometer)) {
+					print ("fire!");
+					renderer.material = fingerSpreadMaterial;
 					thalmicMyo.Vibrate (VibrationType.Short);
-					print ("finger spread");
 					StartCoroutine (denseDamageVibration(thalmicMyo));
 					fireStorm.Attack (thalmicMyo);
 				}

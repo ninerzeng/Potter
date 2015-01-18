@@ -83,8 +83,6 @@ public class JointOrientation : MonoBehaviour
 
         // Here the anti-roll and yaw rotations are applied to the myo Armband's forward direction to yield
         // the orientation of the joint.
-		print ("antiRoll: " + antiRoll);
-		print ("antiYaw: " + _antiYaw);
         transform.rotation = _antiYaw * antiRoll * Quaternion.LookRotation (myo.transform.forward);
 
         // The above calculations were done assuming the Myo armbands's +x direction, in its own coordinate system,
