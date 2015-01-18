@@ -12,6 +12,8 @@ public class Shove : SpellBehavior {
 		foreach(Collider col in enemy_colliders){
 			if (col.gameObject.tag == "Enemy")
 				col.attachedRigidbody.AddForce (force);
+				col.gameObject.GetComponent<EnemyScript>().enemyHealth -= 40;
+
 		}
 	}
 }
