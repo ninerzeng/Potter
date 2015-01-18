@@ -10,7 +10,7 @@ using VibrationType = Thalmic.Myo.VibrationType;
 // Compensate for initial yaw (orientation about the gravity vector) and roll (orientation about
 // the wearer's arm) by allowing the user to set a reference orientation.
 // Making the fingers spread pose or pressing the 'r' key resets the reference orientation.
-public class JointOrientation : MonoBehaviour
+public class JointOrientationTest : MonoBehaviour
 {
     // Myo game object to connect with.
     // This object must have a ThalmicMyo script attached.
@@ -29,6 +29,17 @@ public class JointOrientation : MonoBehaviour
     // so that actions are only performed upon making them rather than every frame during
     // which they are active.
     private Pose _lastPose = Pose.Unknown;
+
+	void Start() {
+//		StartCoroutine (recordLocalRotation());
+	}
+
+	IEnumerator recordLocalRotation() {
+		while(true) {
+			print (transform.localEulerAngles);
+			yield return new WaitForSeconds(1f);
+		}
+	}
 
     // Update is called once per frame.
     void Update ()
@@ -71,31 +82,35 @@ public class JointOrientation : MonoBehaviour
         }
 
         // Current zero roll vector and roll value.
-        Vector3 zeroRoll = computeZeroRollVector (myo.transform.forward);
-        float roll = rollFromZero (zeroRoll, myo.transform.forward, myo.transform.up);
+//        Vector3 zeroRoll = computeZeroRollVector (myo.transform.forward);
+//        float roll = rollFromZero (zeroRoll, myo.transform.forward, myo.transform.up);
 
         // The relative roll is simply how much the current roll has changed relative to the reference roll.
         // adjustAngle simply keeps the resultant value within -180 to 180 degrees.
-        float relativeRoll = normalizeAngle (roll - _referenceRoll);
+//        float relativeRoll = normalizeAngle (roll - _referenceRoll);
 
         // antiRoll represents a rotation about the myo Armband's forward axis adjusting for reference roll.
-        Quaternion antiRoll = Quaternion.AngleAxis (relativeRoll, myo.transform.forward);
+//        Quaternion antiRoll = Quaternion.AngleAxis (relativeRoll, myo.transform.forward);
 
         // Here the anti-roll and yaw rotations are applied to the myo Armband's forward direction to yield
         // the orientation of the joint.
-        transform.rotation = _antiYaw * antiRoll * Quaternion.LookRotation (myo.transform.forward);
+//        transform.rotation = _antiYaw * antiRoll * Quaternion.LookRotation (myo.transform.forward);
+//		transform.localRotation = myo.transform.localRotation;
+//		transform.localRotation = new Quaternion(transform.localRotation.x, transform.localRotation.y, transform.localRotation.z, transform.localRotation.w);
+//		transform.eulerAngles = new Vector3(-transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z);
+			
 
         // The above calculations were done assuming the Myo armbands's +x direction, in its own coordinate system,
         // was facing toward the wearer's elbow. If the Myo armband is worn with its +x direction facing the other way,
         // the rotation needs to be updated to compensate.
-        if (thalmicMyo.xDirection == Thalmic.Myo.XDirection.TowardWrist) {
-            // Mirror the rotation around the XZ plane in Unity's coordinate system (XY plane in Myo's coordinate
-            // system). This makes the rotation reflect the arm's orientation, rather than that of the Myo armband.
-            transform.rotation = new Quaternion(transform.localRotation.x,
-                                                -transform.localRotation.y,
-                                                transform.localRotation.z,
-                                                -transform.localRotation.w);
-        }
+//        if (thalmicMyo.xDirection == Thalmic.Myo.XDirection.TowardWrist) {
+//            // Mirror the rotation around the XZ plane in Unity's coordinate system (XY plane in Myo's coordinate
+//            // system). This makes the rotation reflect the arm's orientation, rather than that of the Myo armband.
+//            transform.rotation = new Quaternion(transform.localRotation.x,
+//                                                -transform.localRotation.y,
+//                                                transform.localRotation.z,
+//                                                -transform.localRotation.w);
+//        }
     }
 
     // Compute the angle of rotation clockwise about the forward axis relative to the provided zero roll direction.

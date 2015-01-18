@@ -2,5 +2,5 @@
 using System.Collections;
 
 public class Wizard : MonoBehaviour {
-	GameObject wandPrefab;
+	public GameObject wandPrefab;
 }
