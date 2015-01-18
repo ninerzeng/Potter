@@ -8,12 +8,15 @@ using VibrationType = Thalmic.Myo.VibrationType;
 
 // Change the material when certain poses are made with the Myo armband.
 // Vibrate the Myo armband when a fist pose is made.
-public class ColorBoxByPose : MonoBehaviour
+public class Wand : MonoBehaviour
 {
     // Myo game object to connect with.
     // This object must have a ThalmicMyo script attached.
     public GameObject myo = null;
-	public SpellBehavior spell1;
+	public SpellBehavior shoveLeftSpell;
+	public SpellBehavior shoveRightSpell;
+	public SpellBehavior stopSpell;
+	public SpellBehavior fireStorm;
     // Materials to change to when poses are made.
     public Material waveInMaterial;
     public Material waveOutMaterial;
@@ -40,31 +43,30 @@ public class ColorBoxByPose : MonoBehaviour
 
             // Vibrate the Myo armband when a fist is made.
             if (thalmicMyo.pose == Pose.Fist) {
-                thalmicMyo.Vibrate (VibrationType.Medium);
-
+				thalmicMyo.Vibrate (VibrationType.Short);
+				stopSpell.Attack ();
                 ExtendUnlockAndNotifyUserAction (thalmicMyo);
 
             // Change material when wave in, wave out or double tap poses are made.
             } else if (thalmicMyo.pose == Pose.WaveIn) {
-				thalmicMyo.Vibrate (VibrationType.Medium);
-
-				print ("Waved in!");
+				thalmicMyo.Vibrate (VibrationType.Short);
+				shoveLeftSpell.Attack ();
                 renderer.material = waveInMaterial;
 
                 ExtendUnlockAndNotifyUserAction (thalmicMyo);
             } else if (thalmicMyo.pose == Pose.WaveOut) {
-				print ("Waved out!");
+				thalmicMyo.Vibrate (VibrationType.Short);
+				shoveRightSpell.Attack ();
                 renderer.material = waveOutMaterial;
 
                 ExtendUnlockAndNotifyUserAction (thalmicMyo);
             } else if (thalmicMyo.pose == Pose.DoubleTap) {
-				print ("Double tapped!");
+				thalmicMyo.Vibrate (VibrationType.Short);
                 renderer.material = doubleTapMaterial;
-
                 ExtendUnlockAndNotifyUserAction (thalmicMyo);
 			} else if (thalmicMyo.pose == Pose.FingersSpread) {
 				StartCoroutine (denseDamageVibration(thalmicMyo));
-				spell1.Attack ();
+				fireStorm.Attack ();
 			}
         }
     }
@@ -72,7 +74,7 @@ public class ColorBoxByPose : MonoBehaviour
 	IEnumerator denseDamageVibration(ThalmicMyo myo) {
 		int vibration_count = 0;
 		while(vibration_count <= 3) {
-			yield return new WaitForSeconds(0.05f);
+			yield return new WaitForSeconds(0.01f);
 			myo.Vibrate (VibrationType.Short);
 			vibration_count++;
 		}
