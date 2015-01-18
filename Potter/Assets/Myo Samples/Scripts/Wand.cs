@@ -21,6 +21,8 @@ public class Wand : MonoBehaviour
     public Material waveInMaterial;
     public Material waveOutMaterial;
     public Material doubleTapMaterial;
+	public Material fistMaterial;
+	public Material fingerSpreadMaterial;
 
     // The pose from the last update. This is used to determine if the pose has changed
     // so that actions are only performed upon making them rather than every frame during
@@ -51,6 +53,7 @@ public class Wand : MonoBehaviour
 					thalmicMyo.Vibrate (VibrationType.Short);
 					print ("fist");
 					liftSpell.Attack(thalmicMyo);
+					renderer.material = fistMaterial;
 					print ("after liftSpell attack");
 	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
 	            // Change material when wave in, wave out or double tap poses are made.
@@ -76,6 +79,7 @@ public class Wand : MonoBehaviour
 				} else if (thalmicMyo.pose == Pose.FingersSpread) {
 					thalmicMyo.Vibrate (VibrationType.Short);
 					print ("finger spread");
+					renderer.material = fingerSpreadMaterial;
 					StartCoroutine (denseDamageVibration(thalmicMyo));
 					fireStorm.Attack (thalmicMyo);
 				}

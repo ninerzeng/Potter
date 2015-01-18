@@ -3502,6 +3502,9 @@ MonoBehaviour:
   waveInMaterial: {fileID: 2100000, guid: 2481aef9b23ed4d869d5fb417a44fefd, type: 2}
   waveOutMaterial: {fileID: 2100000, guid: beca7d66ce77b41769cf37f1a0f2c355, type: 2}
   doubleTapMaterial: {fileID: 2100000, guid: 1f16471eaab1a45bcbf5dbfddc3894d7, type: 2}
+  fistMaterial: {fileID: 2100000, guid: df98f65c1798a3640a8ace9b14456107, type: 2}
+  fingerSpreadMaterial: {fileID: 2100000, guid: e667992b28845df99060a8f876d1d11b,
+    type: 2}
 --- !u!23 &418509790
 Renderer:
   m_ObjectHideFlags: 0
@@ -9362,6 +9365,14 @@ Prefab:
       propertyPath: camera
       value: 
       objectReference: {fileID: 739119383}
+    - target: {fileID: 11400004, guid: 8a6e1697567e54a9f850c5f7ead15337, type: 2}
+      propertyPath: fistMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: df98f65c1798a3640a8ace9b14456107, type: 2}
+    - target: {fileID: 11400004, guid: 8a6e1697567e54a9f850c5f7ead15337, type: 2}
+      propertyPath: fingerSpreadMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e667992b28845df99060a8f876d1d11b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a6e1697567e54a9f850c5f7ead15337, type: 2}
   m_RootGameObject: {fileID: 1893365016}
