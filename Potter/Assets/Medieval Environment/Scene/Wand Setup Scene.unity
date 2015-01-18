@@ -3237,6 +3237,7 @@ GameObject:
   - 33: {fileID: 418509791}
   - 23: {fileID: 418509790}
   - 114: {fileID: 418509789}
+  - 114: {fileID: 418509792}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -3269,6 +3270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myo: {fileID: 710869942}
+  spell1: {fileID: 418509792}
   waveInMaterial: {fileID: 2100000, guid: 2481aef9b23ed4d869d5fb417a44fefd, type: 2}
   waveOutMaterial: {fileID: 2100000, guid: beca7d66ce77b41769cf37f1a0f2c355, type: 2}
   doubleTapMaterial: {fileID: 2100000, guid: 1f16471eaab1a45bcbf5dbfddc3894d7, type: 2}
@@ -3301,6 +3303,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 418509787}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &418509792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 418509787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3788b153bbf214c0997f73e86a199166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nowSpellObj: {fileID: 100002, guid: b2e1927a9cfbd4c03a114b0166c00dce, type: 2}
+  spawnRadius: 25
+  numFireBalls: 100
 --- !u!1 &422639861
 GameObject:
   m_ObjectHideFlags: 0
@@ -11539,7 +11555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeTime: 2
   fadeColor: {r: .00999999978, g: .00999999978, b: .00999999978, a: 1}
-  fadeShader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+  fadeShader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 3}
 --- !u!20 &1556854902
 Camera:
   m_ObjectHideFlags: 0
@@ -11795,7 +11811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeTime: 2
   fadeColor: {r: .00999999978, g: .00999999978, b: .00999999978, a: 1}
-  fadeShader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+  fadeShader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 3}
 --- !u!20 &1585764160
 Camera:
   m_ObjectHideFlags: 0
@@ -13873,7 +13889,7 @@ Transform:
   m_GameObject: {fileID: 1893365016}
   m_LocalRotation: {x: 0, y: .0459847525, z: 0, w: .998942137}
   m_LocalPosition: {x: .29227823, y: 0, z: .0169570819}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children:
   - {fileID: 285610158}
   m_Father: {fileID: 39773012}

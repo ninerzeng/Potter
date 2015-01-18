@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 using LockingPolicy = Thalmic.Myo.LockingPolicy;
@@ -13,7 +13,7 @@ public class ColorBoxByPose : MonoBehaviour
     // Myo game object to connect with.
     // This object must have a ThalmicMyo script attached.
     public GameObject myo = null;
-
+	public SpellBehavior spell1;
     // Materials to change to when poses are made.
     public Material waveInMaterial;
     public Material waveOutMaterial;
@@ -46,6 +46,8 @@ public class ColorBoxByPose : MonoBehaviour
 
             // Change material when wave in, wave out or double tap poses are made.
             } else if (thalmicMyo.pose == Pose.WaveIn) {
+				thalmicMyo.Vibrate (VibrationType.Medium);
+
 				print ("Waved in!");
                 renderer.material = waveInMaterial;
 
@@ -60,9 +62,21 @@ public class ColorBoxByPose : MonoBehaviour
                 renderer.material = doubleTapMaterial;
 
                 ExtendUnlockAndNotifyUserAction (thalmicMyo);
-            }
+			} else if (thalmicMyo.pose == Pose.FingersSpread) {
+				StartCoroutine (denseDamageVibration(thalmicMyo));
+				spell1.Attack ();
+			}
         }
     }
+
+	IEnumerator denseDamageVibration(ThalmicMyo myo) {
+		int vibration_count = 0;
+		while(vibration_count <= 3) {
+			yield return new WaitForSeconds(0.05f);
+			myo.Vibrate (VibrationType.Short);
+			vibration_count++;
+		}
+	}
 
     // Extend the unlock if ThalmcHub's locking policy is standard, and notifies the given myo that a user action was
     // recognized.
