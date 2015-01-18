@@ -168,6 +168,10 @@ public class AIPath : MonoBehaviour {
 	 * \see RepeatTrySearchPath
 	 */
 	protected virtual void Start () {
+		GameObject[] players = GameObject.FindGameObjectsWithTag("MainCamera");
+		foreach (GameObject player in players) {
+				target = player.transform;
+		}
 		startHasRun = true;
 		OnEnable ();
 	}
