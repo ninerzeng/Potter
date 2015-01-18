@@ -13,7 +13,7 @@ namespace Library
 		public class Accelerometer
 		{
 			static public bool forcedGesture(Vector3 accelerometer) {
-				return Mathf.Abs(accelerometer.x) > 1.1f || Mathf.Abs (accelerometer.y) > 1.1f || Mathf.Abs (accelerometer.z) > 1.1f;
+				return Mathf.Abs(accelerometer.x) > 1.075f || Mathf.Abs (accelerometer.y) > 1.075f || Mathf.Abs (accelerometer.z) > 1.075f;
 			}
 		}
 }
