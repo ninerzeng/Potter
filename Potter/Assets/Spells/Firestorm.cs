@@ -13,6 +13,14 @@ public class Firestorm : SpellBehavior {
 		{
 			StartCoroutine (spitFireBall());
 		}
+
+		Collider[] enemy_colliders = Physics.OverlapSphere(transform.position, impactRadius);
+		foreach(Collider col in enemy_colliders) 
+		{
+			if (col.gameObject.tag == "Enemy") {
+				col.gameObject.GetComponent<EnemyScript>().hurt();
+			}
+		}
 	}
 
 	IEnumerator spitFireBall()
@@ -26,13 +34,6 @@ public class Firestorm : SpellBehavior {
 
 		GameObject fireball = Instantiate (nowSpellObj, spawnPosition, myrotate) as GameObject;
 		yield return new WaitForSeconds(3.0f);
-
-		foreach(Collider col in enemy_colliders) 
-		{
-			if (col.gameObject.tag == "Enemy") {
-				col.gameObject.GetComponent<EnemyScript>().enemyHealth -= 40;
-			}
-		}
 		Destroy (fireball);
 	}
 }

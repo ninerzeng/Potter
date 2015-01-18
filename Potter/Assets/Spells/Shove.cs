@@ -10,10 +10,10 @@ public class Shove : SpellBehavior {
 	public override void Attack(ThalmicMyo myo) {
 		Collider[] enemy_colliders = Physics.OverlapSphere(character.transform.position, impactRadius);
 		foreach(Collider col in enemy_colliders){
-			if (col.gameObject.tag == "Enemy")
+			if (col.gameObject.tag == "Enemy") {
 				col.attachedRigidbody.AddForce (force);
-				col.gameObject.GetComponent<EnemyScript>().enemyHealth -= 40;
-
+				col.gameObject.GetComponent<EnemyScript>().hurt();
+			}
 		}
 	}
 }

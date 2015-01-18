@@ -3751,6 +3751,8 @@ MonoBehaviour:
   waveInMaterial: {fileID: 2100000, guid: 2481aef9b23ed4d869d5fb417a44fefd, type: 2}
   waveOutMaterial: {fileID: 2100000, guid: beca7d66ce77b41769cf37f1a0f2c355, type: 2}
   doubleTapMaterial: {fileID: 2100000, guid: 1f16471eaab1a45bcbf5dbfddc3894d7, type: 2}
+  fistMaterial: {fileID: 0}
+  fingerSpreadMaterial: {fileID: 0}
 --- !u!23 &418509790
 Renderer:
   m_ObjectHideFlags: 0
@@ -3794,6 +3796,7 @@ MonoBehaviour:
   nowSpellObj: {fileID: 100002, guid: b2e1927a9cfbd4c03a114b0166c00dce, type: 2}
   spawnRadius: 25
   numFireBalls: 100
+  impactRadius: 25
 --- !u!114 &418509793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3836,6 +3839,7 @@ MonoBehaviour:
   nowSpellObj: {fileID: 100002, guid: b2e1927a9cfbd4c03a114b0166c00dce, type: 2}
   spawnRadius: 25
   numFireBalls: 100
+  impactRadius: 25
 --- !u!114 &418509796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6467,7 +6471,7 @@ Transform:
   m_PrefabInternal: {fileID: 641005291}
   m_GameObject: {fileID: 706104204}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 504322832}
@@ -11987,9 +11991,6 @@ GameObject:
   - 111: {fileID: 1251210742}
   - 65: {fileID: 1251210741}
   - 54: {fileID: 1251210740}
-  - 114: {fileID: 1251210739}
-  - 143: {fileID: 1251210738}
-  - 114: {fileID: 1251210737}
   m_Layer: 0
   m_Name: CaveWorm
   m_TagString: Enemy
@@ -12011,73 +12012,6 @@ Transform:
   - {fileID: 1537229687}
   m_Father: {fileID: 0}
   m_RootOrder: 15
---- !u!114 &1251210737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11492932, guid: 37fc6aa02d4c09e48b3d79f84244ab93,
-    type: 2}
-  m_PrefabInternal: {fileID: 641005291}
-  m_GameObject: {fileID: 1251210735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ac18cdd242041b6bebc0e95b624c85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  repathRate: .100000001
-  target: {fileID: 0}
-  canSearch: 1
-  canMove: 1
-  speed: 10
-  turningSpeed: 1
-  slowdownDistance: .600000024
-  pickNextWaypointDist: 2
-  forwardLook: 1
-  endReachedDistance: .200000003
-  closestOnPathCheck: 1
---- !u!143 &1251210738
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 14329914, guid: 37fc6aa02d4c09e48b3d79f84244ab93,
-    type: 2}
-  m_PrefabInternal: {fileID: 641005291}
-  m_GameObject: {fileID: 1251210735}
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: .5
-  m_SlopeLimit: 45
-  m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1251210739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11461596, guid: 37fc6aa02d4c09e48b3d79f84244ab93,
-    type: 2}
-  m_PrefabInternal: {fileID: 641005291}
-  m_GameObject: {fileID: 1251210735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawGizmos: 1
-  detailedGizmos: 0
-  saveGetNearestHints: 1
-  startEndModifier:
-    priority: 1
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags:
-    tagsChange: -1
-    tagsSet: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!54 &1251210740
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12102,7 +12036,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 641005291}
   m_GameObject: {fileID: 1251210735}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -12116,13 +12050,12 @@ Animation:
   m_GameObject: {fileID: 1251210735}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400002, guid: bfeda64184da26b479effef1188c76f1, type: 3}
+  m_Animation: {fileID: 7400000, guid: bfeda64184da26b479effef1188c76f1, type: 3}
   m_Animations:
   - {fileID: 7400000, guid: bfeda64184da26b479effef1188c76f1, type: 3}
   - {fileID: 7400002, guid: bfeda64184da26b479effef1188c76f1, type: 3}
   - {fileID: 7400004, guid: bfeda64184da26b479effef1188c76f1, type: 3}
   - {fileID: 7400006, guid: bfeda64184da26b479effef1188c76f1, type: 3}
-  - {fileID: 7400014, guid: 449b48f7eb5d87a4baaa5fb73f875a59, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -13985,7 +13918,7 @@ Transform:
   m_PrefabInternal: {fileID: 641005291}
   m_GameObject: {fileID: 1537229686}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: .709999979, y: 3.45000005, z: 1.24000001}
+  m_LocalPosition: {x: 4.9839508e-17, y: 2.13386011, z: .813967764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1251210736}
@@ -16799,7 +16732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies: []
   enemy: {fileID: 100120, guid: 37fc6aa02d4c09e48b3d79f84244ab93, type: 2}
-  enemyCount: 1
+  numEnemy: 100
 --- !u!4 &1863769072
 Transform:
   m_ObjectHideFlags: 0
