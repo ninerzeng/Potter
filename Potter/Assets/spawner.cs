@@ -13,7 +13,7 @@ public class spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if(enemies.Count < 100)
+		if(enemies.Count < 300)
 		{
 			Vector3 spawnPosition = new Vector3(Random.insideUnitSphere.x * spawnRadius + this.transform.position.x, 
 			                                    transform.position.y+ 4.098938f, this.transform.position.z + Random.insideUnitSphere.z * spawnRadius);
