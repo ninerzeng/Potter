@@ -15,7 +15,7 @@ public class Wand : MonoBehaviour
     public GameObject myo = null;
 	public SpellBehavior shoveLeftSpell;
 	public SpellBehavior shoveRightSpell;
-	public SpellBehavior stopSpell;
+	public SpellBehavior liftSpell;
 	public SpellBehavior fireStorm;
     // Materials to change to when poses are made.
     public Material waveInMaterial;
@@ -27,48 +27,61 @@ public class Wand : MonoBehaviour
     // which they are active.
     private Pose _lastPose = Pose.Unknown;
 
+	void Start() {
+		StartCoroutine (attackReactor());
+	}
+
     // Update is called once per frame.
-    void Update ()
+    IEnumerator attackReactor ()
     {
-        // Access the ThalmicMyo component attached to the Myo game object.
-        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
+		while(true) {
+	        // Access the ThalmicMyo component attached to the Myo game object.
+	        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
 
-        // Check if the pose has changed since last update.
-        // The ThalmicMyo component of a Myo game object has a pose property that is set to the
-        // currently detected pose (e.g. Pose.Fist for the user making a fist). If no pose is currently
-        // detected, pose will be set to Pose.Rest. If pose detection is unavailable, e.g. because Myo
-        // is not on a user's arm, pose will be set to Pose.Unknown.
-        if (thalmicMyo.pose != _lastPose) {
-            _lastPose = thalmicMyo.pose;
+	        // Check if the pose has changed since last update.
+	        // The ThalmicMyo component of a Myo game object has a pose property that is set to the
+	        // currently detected pose (e.g. Pose.Fist for the user making a fist). If no pose is currently
+	        // detected, pose will be set to Pose.Rest. If pose detection is unavailable, e.g. because Myo
+	        // is not on a user's arm, pose will be set to Pose.Unknown.
+	        if (thalmicMyo.pose != _lastPose) {
+	            _lastPose = thalmicMyo.pose;
 
-            // Vibrate the Myo armband when a fist is made.
-            if (thalmicMyo.pose == Pose.Fist) {
-				thalmicMyo.Vibrate (VibrationType.Short);
-				stopSpell.Attack ();
-                ExtendUnlockAndNotifyUserAction (thalmicMyo);
+	            // Vibrate the Myo armband when a fist is made.
+	            if (thalmicMyo.pose == Pose.Fist) {
+					thalmicMyo.Vibrate (VibrationType.Short);
+					print ("fist");
+					liftSpell.Attack(thalmicMyo);
+					print ("after liftSpell attack");
+	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
+	            // Change material when wave in, wave out or double tap poses are made.
+	            } else if (thalmicMyo.pose == Pose.WaveIn) {
+					thalmicMyo.Vibrate (VibrationType.Short);
+					print ("wave in");
+					shoveLeftSpell.Attack (thalmicMyo);
+	                renderer.material = waveInMaterial;
 
-            // Change material when wave in, wave out or double tap poses are made.
-            } else if (thalmicMyo.pose == Pose.WaveIn) {
-				thalmicMyo.Vibrate (VibrationType.Short);
-				shoveLeftSpell.Attack ();
-                renderer.material = waveInMaterial;
+	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
+	            } else if (thalmicMyo.pose == Pose.WaveOut) {
+					thalmicMyo.Vibrate (VibrationType.Short);
+					print ("wave out");
+					shoveRightSpell.Attack (thalmicMyo);
+	                renderer.material = waveOutMaterial;
 
-                ExtendUnlockAndNotifyUserAction (thalmicMyo);
-            } else if (thalmicMyo.pose == Pose.WaveOut) {
-				thalmicMyo.Vibrate (VibrationType.Short);
-				shoveRightSpell.Attack ();
-                renderer.material = waveOutMaterial;
-
-                ExtendUnlockAndNotifyUserAction (thalmicMyo);
-            } else if (thalmicMyo.pose == Pose.DoubleTap) {
-				thalmicMyo.Vibrate (VibrationType.Short);
-                renderer.material = doubleTapMaterial;
-                ExtendUnlockAndNotifyUserAction (thalmicMyo);
-			} else if (thalmicMyo.pose == Pose.FingersSpread) {
-				StartCoroutine (denseDamageVibration(thalmicMyo));
-				fireStorm.Attack ();
-			}
-        }
+	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
+	            } else if (thalmicMyo.pose == Pose.DoubleTap) {
+					thalmicMyo.Vibrate (VibrationType.Short);
+					print ("double tap");
+	                renderer.material = doubleTapMaterial;
+	                ExtendUnlockAndNotifyUserAction (thalmicMyo);
+				} else if (thalmicMyo.pose == Pose.FingersSpread) {
+					thalmicMyo.Vibrate (VibrationType.Short);
+					print ("finger spread");
+					StartCoroutine (denseDamageVibration(thalmicMyo));
+					fireStorm.Attack (thalmicMyo);
+				}
+	        }
+			yield return null;
+		}
     }
 
 	IEnumerator denseDamageVibration(ThalmicMyo myo) {
