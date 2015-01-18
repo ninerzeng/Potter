@@ -15131,6 +15131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myo: {fileID: 710869942}
+  camera: {fileID: 739119383}
 --- !u!1001 &1897748148
 Prefab:
   m_ObjectHideFlags: 0
