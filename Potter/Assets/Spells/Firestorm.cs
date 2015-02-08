@@ -2,12 +2,18 @@
 using System.Collections;
 
 
-public class Firestorm : SpellBehavior {
+public class Firestorm : MonoBehaviour {
 	public GameObject nowSpellObj;
 	public float spawnRadius = 25f;
 	public int numFireBalls = 20;
 	public float impactRadius = 25f;
-	public override void Attack (ThalmicMyo myo)
+
+	void FixedUpdate(){
+		if(Input.GetKey(KeyCode.F)){
+			Attack();
+		}
+	}
+	public void Attack ()
 	{
 		for(int i = 0; i < numFireBalls; i++)
 		{
@@ -17,9 +23,9 @@ public class Firestorm : SpellBehavior {
 		Collider[] enemy_colliders = Physics.OverlapSphere(transform.position, impactRadius);
 		foreach(Collider col in enemy_colliders) 
 		{
-			if (col.gameObject.tag == "Enemy") {
-				col.gameObject.GetComponent<EnemyScript>().hurt();
-			}
+		//	if (col.gameObject.tag == "Enemy") {
+		//		col.gameObject.GetComponent<EnemyScript>().hurt();
+		//	}
 		}
 	}
 
