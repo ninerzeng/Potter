@@ -7,6 +7,7 @@ public class LiftSpell : MonoBehaviour {
 
 	public GameObject character;
 	public float impactRadius = 25f;
+	public bool lifted = false;
 
 	bool grounded = false;
 
@@ -32,6 +33,7 @@ public class LiftSpell : MonoBehaviour {
 			if (col.gameObject.tag == "Enemy") {
 				col.rigidbody.velocity = Vector3.up * 2;
 				col.rigidbody.useGravity = false;
+				lifted = true;
 				Seeker seeker = col.GetComponent<Seeker>();
 				if (seeker)
 				seeker.enabled = false;

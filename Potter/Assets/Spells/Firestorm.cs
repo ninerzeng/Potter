@@ -23,9 +23,9 @@ public class Firestorm : MonoBehaviour {
 		Collider[] enemy_colliders = Physics.OverlapSphere(transform.position, impactRadius);
 		foreach(Collider col in enemy_colliders) 
 		{
-		//	if (col.gameObject.tag == "Enemy") {
-		//		col.gameObject.GetComponent<EnemyScript>().hurt();
-		//	}
+			if (col.gameObject.tag == "Enemy") {
+				col.gameObject.GetComponent<EnemyScreept>().hurt();
+			}
 		}
 	}
 

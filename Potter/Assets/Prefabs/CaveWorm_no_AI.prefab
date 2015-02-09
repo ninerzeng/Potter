@@ -402,8 +402,7 @@ GameObject:
   - 111: {fileID: 11121952}
   - 65: {fileID: 6521952}
   - 54: {fileID: 5421952}
-  - 143: {fileID: 14352074}
-  - 114: {fileID: 11400000}
+  - 114: {fileID: 11462644}
   m_Layer: 0
   m_Name: CaveWorm_no_AI
   m_TagString: Enemy
@@ -1449,7 +1448,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121912}
-  m_LocalRotation: {x: 0, y: 0, z: -.27900368, w: .960290015}
+  m_LocalRotation: {x: 0, y: 0, z: -.27900371, w: .960290074}
   m_LocalPosition: {x: -.461022586, y: 6.66133841e-17, z: -1.6653346e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1758,7 +1757,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11400000
+--- !u!114 &11462644
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1766,11 +1765,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 121884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e501ea6ab3794d1b80ab57ef00cbf2d, type: 3}
+  m_Script: {fileID: 11500000, guid: c98507b8b49b9f143aceb5ddcdf33319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 100
-  grounded: 0
+  health: 5
 --- !u!137 &13721952
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1828,20 +1826,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -.586667538, y: .839999974, z: -.0879938602}
     m_Extent: {x: 2.17527962, y: 1.8143084, z: 2.19309998}
   m_DirtyAABB: 0
---- !u!143 &14352074
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121884}
-  serializedVersion: 2
-  m_Height: .00999999978
-  m_Radius: .00999999978
-  m_SlopeLimit: 45
-  m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
