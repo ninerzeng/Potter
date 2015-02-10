@@ -51,6 +51,7 @@ public class NewShove : MonoBehaviour {
 		else {
 			print ("left");
 			if (angles.y >= 315 || angles.y < 45) {
+				force = Vector3.zero;
 				force.x = -1000;
 				print ("N");
 			} else if (angles.y >= 45 && angles.y < 135) {

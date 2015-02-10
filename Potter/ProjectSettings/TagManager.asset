@@ -6,6 +6,7 @@ TagManager:
   - Enemy
   - Terrain
   - fireShot
+  - Block
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
