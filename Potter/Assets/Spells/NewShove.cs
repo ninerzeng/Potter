@@ -26,7 +26,7 @@ public class NewShove : MonoBehaviour {
 		Collider[] enemy_colliders = Physics.OverlapSphere(player.transform.position, impactRadius);
 		Vector3 angles = player.transform.eulerAngles;
 		//right
-		if (Input.GetKey(KeyCode.L)) {
+		if (Input.GetKey(KeyCode.R)) {
 			print ("right");
 			if (angles.y >= 315 || angles.y < 45) {
 				force.x = 1000;
@@ -48,7 +48,7 @@ public class NewShove : MonoBehaviour {
 			} 
 		}
 		//left
-		else if (left_or_right == 0) {
+		else {
 			print ("left");
 			if (angles.y >= 315 || angles.y < 45) {
 				force.x = -1000;
